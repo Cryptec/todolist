@@ -9,7 +9,9 @@ function App() {
   // 2
   return (
     <div className="container">
-      <h1 className="title">Todo List</h1>
+      <br></br>
+       <h1 className="title">Todo List</h1>
+      <br></br>
       <NewTaskForm />
       <TaskList />
     </div>
