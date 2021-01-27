@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import TaskProvider from './TaskProvider'
 
 ReactDOM.render(
+  <TaskProvider>
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </TaskProvider>,
   document.getElementById('root')
 );
 
