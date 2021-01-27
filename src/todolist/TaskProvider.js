@@ -21,10 +21,12 @@ export default function TaskProvider({ children }) {
           }
       ])
 
+
   // 5
   const setStatusTask = (id, status) => {
       setTasks(tasks.map(t => t.id === id ? {...t, complete: status} : t))
   }
+
 
   // 6
   return (

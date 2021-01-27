@@ -1,6 +1,8 @@
 // 1
-import React from 'react'
-import { useTasks } from './TaskProvider'
+import React from 'react';
+import { useTasks } from './TaskProvider';
+import * as FaIcons from 'react-icons/fa';
+import './Todo.scss'
 
 export default function Task({ id, task, complete }) {
   // 2
@@ -16,6 +18,9 @@ export default function Task({ id, task, complete }) {
       </td>
       <td>
         <span className={ complete ? 'task-done' : '' }>{ task }</span>
+      </td>
+      <td>
+         <button type="button" className="delButton" ><FaIcons.FaTrash /></button>
       </td>
     </tr>
   )

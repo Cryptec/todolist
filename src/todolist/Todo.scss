@@ -4,6 +4,12 @@ body {
   height: 100%;
   background-color: #A6979C;
 
+  .delButton {
+    background-color: transparent;
+    border: none;
+    font-size: medium;
+  }
+
 
   .container {
     display: flex;
