@@ -93,7 +93,7 @@ class Loginform extends Component {
 
         axios({
             method: "POST",
-            url: "http://213.196.200.119:8080/login",
+            url: "https://rust.mneubauer.com/login",
             headers: { 'Content-Type': 'application/json' },
             data: { name: this.state.name, password: this.state.password }
             
