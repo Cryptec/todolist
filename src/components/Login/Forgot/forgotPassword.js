@@ -96,7 +96,7 @@ class ForgotPassword extends Component {
 
         axios({
             method: "POST",
-            url: "http://213.196.200.119:8080/forgot_password",
+            url: "https://rust.mneubauer.com/forgot_password",
             headers: { 'Content-Type': 'application/json' },
             data: { email: this.state.email, password: this.state.password }
 

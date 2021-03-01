@@ -115,7 +115,7 @@ class Registerbox extends Component {
         
         axios({
             method: "POST",
-            url: "http://213.196.200.119:8080/register",
+            url: "https://rust.mneubauer.com/register",
             headers: { 'Content-Type': 'application/json' },
             data: { regname: this.state.regname, regpassword: this.state.regpassword, regemail: this.state.regemail }
 
