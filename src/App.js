@@ -10,6 +10,7 @@ import Home from './screens/home'
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import LoginWindow from './screens/Loginwindow';
+import ForgotWindow from './screens/Forgotwindow.js'
 
 class App extends Component {
 
@@ -19,6 +20,7 @@ class App extends Component {
         <Switch>
           <PrivateRoute restricted={false} component={Home} path="/" exact />
           <PublicRoute restricted={true} component={LoginWindow} path="/login" exact />
+          <PublicRoute restricted={true} component={ForgotWindow} path="/forgot" exact />
         </Switch>
       </Router>
     );

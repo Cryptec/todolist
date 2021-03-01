@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
+import ForgotWindow from '../../screens/Forgotwindow';
 import '../../css/loginbox.css';
 import login from '../../utils';
 
@@ -60,7 +61,7 @@ class Loginform extends Component {
                             />
                 
                         </div>
-                        <a href="/home" style={{fontSize: "0.8rem", textDecoration: "none", color: "white"}}> forgot password?</a>
+                        <Link to="/forgot" onClick={() => ForgotWindow()} style={{fontSize: "0.8rem", textDecoration: "none", color: "white"}}> forgot password? </Link>
 
                     </div>
    
