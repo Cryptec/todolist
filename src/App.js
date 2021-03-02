@@ -11,6 +11,7 @@ import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import LoginWindow from './screens/Loginwindow';
 import ForgotWindow from './screens/Forgotwindow.js'
+import Verfify from './components/auth/Verify';
 
 class App extends Component {
 
@@ -19,6 +20,7 @@ class App extends Component {
       <Router>
         <Switch>
           <PrivateRoute restricted={false} component={Home} path="/" exact />
+          <PublicRoute restricted={true} component={Verfify} path="/verify" exact />
           <PublicRoute restricted={true} component={LoginWindow} path="/login" exact />
           <PublicRoute restricted={true} component={ForgotWindow} path="/forgot" exact />
         </Switch>
