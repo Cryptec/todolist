@@ -49,6 +49,22 @@
   font-size: 1rem;
   text-align: center;
 }
+
+.redirectContent {
+  width: 70vw;
+  height: 70vh;
+  background-color: rgb(170, 170, 170);
+  border: 1px solid black;
+  border-radius: 6px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 5vmin;
+  line-height: 70vh;
+  margin-left: 15vw;
+  margin-top: 15vh;
+}
 @media (max-width: 1000px) {
   div.loginTextBox {
     display: none;
