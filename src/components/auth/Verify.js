@@ -66,8 +66,6 @@ else{
                     <div className="redirectContent">
                   
                    
-                         Hello!
-                   
                          no access to this page!
                    
                
