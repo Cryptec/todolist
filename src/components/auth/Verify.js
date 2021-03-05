@@ -83,8 +83,20 @@ else{
 
 
 handleSubmit(foo,registration){
+    
+    alert("Eingabe: " + foo + " wird weiter geleitet!");
+    axios({
+        method: "POST",
+        url: "https://rust.mneubauer.com/verify",
+        headers: { 'Content-Type': 'application/json' },
+        data: { token: foo, registration: registration }
 
-    setTimeout(function(){ window.location.replace("/login"); }, 3000);
+    }).then((response) => {
+        if (response.data.answer === "Success") {
+           
+            }
+        })
+
     }
 }
 
