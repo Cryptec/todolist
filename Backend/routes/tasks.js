@@ -1,4 +1,5 @@
 const router = require('express').Router()
+var db = require('../Database')
 
 require('dotenv').config()
 
@@ -11,35 +12,46 @@ router.get('/ping', function (req, res) {
 router.post('/settask', function(req,res){
   var data = {
     task: req.body.task,
+    done: req.body.done,
     id: req.body.id
 }
-  var params = [data.task, data.id]
+  var params = [data.task, data.done, data.id]
   db.serialize(()=>{
-      db.run('INSERT INTO Tasks (task, id) VALUES (?, ?)', params, function(err){
+      db.run('INSERT INTO Tasks (task, done, id) VALUES (?, ?, ?)', params, function(err){
       if(err){
         res.send("Error encountered while updating");
         return res.status(400).json({ error: true });
       }
-      return res.send({success: true});
+      return res.send({"answer": "success"});
     });
   });
 });
 
-router.post('/settheme', function (req, res) {
-  var data = {
-    theme: req.body.theme,
-    id: req.body.id
-  }
-  var params = [data.theme, data.id]
-  db.serialize(() => {
-    db.run('UPDATE Settings SET theme = ? WHERE id = ?', params, function (err) {
-      if (err) {
-        res.send("Error encountered while updating");
-        return res.status(400).json({ error: true });
-      }
-      return res.send({ success: true });
-    });
+router.get("/tasks", (req, res, next) => {
+  var sql = "select * from Tasks"
+  var params = []
+  db.all(sql, params, (err, rows) => {
+    if (err) {
+      res.status(400).json({ "error": err.message });
+      return;
+    }
+    res.status(200).json(rows);
   });
 });
+
+router.delete("/task/:id", (req, res, next) => {
+  db.run(
+      'DELETE FROM Tasks WHERE id = ?',
+      req.params.id,
+      function (err, result) {
+          if (err){
+              res.status(400).json({"error": res.message})
+              return;
+          }
+          res.status(200).json({"message":"deleted", changes: this.changes})
+  });
+})
+
+
 
 module.exports = router;
