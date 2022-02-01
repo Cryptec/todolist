@@ -10,7 +10,7 @@ class Task extends Component {
     super()
     this.state = {
       task: '',
-      done: 'false',
+      done: '',
       fetchtasks: []
     }
   }
@@ -27,13 +27,19 @@ class Task extends Component {
       console.log('error')
     }
   }
+
+
   render() {
     return this.state.fetchtasks.map(tasks => {
-     
+  
     return (
     <tr>
       <td>
-        <input type="checkbox" id='checkbox' onChange={this.handleChange.bind(this)} />
+        <input 
+           type="checkbox" 
+           id='checkbox' 
+           onChange={() => this.handleChange(tasks.id)}
+           value={this.state.done} />
       </td>
       <td>
         <span className={ this.state.done === "true" ? 'task-done' : '' }>{ tasks.task}</span>
@@ -59,12 +65,30 @@ class Task extends Component {
   }
   
   
-  handleChange(event) {
-    const field = event.target.id
+  handleChange(id) {
 
-    if (field === 'checkbox') {
-      this.setState({ done: "true" })
-    } 
+    var checkBox = document.getElementById('checkbox')
+
+    if (checkBox.checked === true) {
+      this.setState({ done: 'true' })
+    } else  { this.setState({ done: 'false' }) }  
+
+    axios({
+      method: 'POST',
+      url: `${API_ENDPOINT}/api/setstate/${id}`,
+      headers: { 'Content-Type': 'application/json' },
+      data: {
+        id: id,
+        done: this.state.done,
+      },
+    }).then((response) => {
+      if (response.data.answer === 'success') {
+        this.setState({
+          task: ''
+        })
+        console.log('Form sent')
+      }
+    })
   }
   handleSubmit(event) {
     event.preventDefault()

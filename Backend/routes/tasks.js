@@ -52,6 +52,21 @@ router.delete("/task/:id", (req, res, next) => {
   });
 })
 
+router.post('/setstate/:id', function (req, res) {
+  var data = {
+    done: req.body.done,
+    id: req.body.id
+  }
+  var params = [data.done, data.id]
+    db.run('UPDATE Tasks SET done = ? WHERE id = ?', params, function (err) {
+      if (err) {
+        res.send("Error encountered while updating");
+        return res.status(400).json({ error: true });
+      }
+      return res.send({"answer": "success"});
+    });
+});
+
 
 
 module.exports = router;
