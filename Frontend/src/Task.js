@@ -21,13 +21,21 @@ class Task extends Component {
       const fetchtasks = await response.json()
       this.setState({ fetchtasks })
       this.state.fetchtasks.map(task => {
-      return this.setState({ done: task.done, task: task.task })
+      this.setState({ done: task.done, task: task.task })
+      this.handleCheck()
       })
     } else {
       console.log('error')
     }
   }
 
+  handleCheck = () => {
+    if (this.state.done === 'true') {
+      document.getElementById('checkbox').checked = true
+    } else if  (this.state.done === 'false') {
+      document.getElementById('checkbox').checked = false
+    }
+  }
 
   render() {
     return this.state.fetchtasks.map(tasks => {
@@ -39,7 +47,8 @@ class Task extends Component {
            type="checkbox" 
            id='checkbox' 
            onChange={() => this.handleChange(tasks.id)}
-           value={this.state.done} />
+           value={this.state.done}
+           />
       </td>
       <td>
         <span className={ this.state.done === "true" ? 'task-done' : '' }>{ tasks.task}</span>
@@ -71,24 +80,41 @@ class Task extends Component {
 
     if (checkBox.checked === true) {
       this.setState({ done: 'true' })
-    } else  { this.setState({ done: 'false' }) }  
-
-    axios({
-      method: 'POST',
-      url: `${API_ENDPOINT}/api/setstate/${id}`,
-      headers: { 'Content-Type': 'application/json' },
-      data: {
-        id: id,
-        done: this.state.done,
-      },
-    }).then((response) => {
-      if (response.data.answer === 'success') {
-        this.setState({
-          task: ''
-        })
-        console.log('Form sent')
-      }
-    })
+      axios({
+        method: 'POST',
+        url: `${API_ENDPOINT}/api/setstate/${id}`,
+        headers: { 'Content-Type': 'application/json' },
+        data: {
+          id: id,
+          done: 'true',
+        },
+      }).then((response) => {
+        if (response.data.answer === 'success') {
+          this.setState({
+            task: ''
+          })
+          console.log('Form sent')
+        }
+      })
+    } else if (checkBox.checked === false) { 
+      this.setState({ done: 'false' }) 
+      axios({
+        method: 'POST',
+        url: `${API_ENDPOINT}/api/setstate/${id}`,
+        headers: { 'Content-Type': 'application/json' },
+        data: {
+          id: id,
+          done: 'false',
+        },
+      }).then((response) => {
+        if (response.data.answer === 'success') {
+          this.setState({
+            task: ''
+          })
+          console.log('Form sent')
+        }
+      })
+    }  
   }
   handleSubmit(event) {
     event.preventDefault()
