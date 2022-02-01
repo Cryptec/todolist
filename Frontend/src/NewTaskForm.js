@@ -17,7 +17,12 @@ export default function NewTaskForm() {
   return (
     // 4
     <form onSubmit={submit}>
-      <input type="text" value={task} placeholder="New task..." onChange={e => setTask(e.target.value)} required />
+      <input 
+         type="text" 
+         value={task} 
+         placeholder="New task..." 
+         onChange={e => setTask(e.target.value)} 
+         required />
       <button>Add</button>
     </form>
   )

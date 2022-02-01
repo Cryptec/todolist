@@ -18,7 +18,7 @@ export default function Task({ id, task, complete }) {
         <span className={ complete ? 'task-done' : '' }>{ task }</span>
       </td>
       <td>
-        <span className={ complete ? 'task-done' : '' }> X </span>
+        <span className={complete ? 'task-done' : ''}> X </span>
       </td>
     </tr>
   )
