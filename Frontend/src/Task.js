@@ -65,13 +65,14 @@ class Task extends Component {
            id={tasks.id}
            onChange={() => this.handleChange(tasks.id)}
            value={this.state.done}
+           key={this.state.count}
            />
       </td>
       <td>
         <span id={tasks.id} key={this.state.count} className={ taskdone ? 'task-done' : '' }>{tasks.task}</span>
       </td>
       <td>
-        <span onClick={() => this.deleteTableRow(tasks.id)}> X </span>
+        <span style={{cursor: 'pointer'}} onClick={() => this.deleteTableRow(tasks.id)}> X </span>
       </td>
     </tr>
   )
@@ -79,7 +80,7 @@ class Task extends Component {
   }
 
   deleteTableRow = async (id) => {
-    
+    document.getElementById(id).checked = false
     await fetch(`${API_ENDPOINT}/api/task/${id}`, { method: 'DELETE'})
     const response = await fetch(`${API_ENDPOINT}/api/tasks`)
     if (response.ok) {

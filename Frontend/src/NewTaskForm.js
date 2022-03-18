@@ -1,6 +1,7 @@
 // 1
 import React, { Component } from 'react'
 import axios from 'axios'
+import TaskList from './TaskList'
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:5000'
 
@@ -10,14 +11,15 @@ class NewTaskForm extends Component {
     super()
     this.state = {
       task: '',
-      done: 'false'
+      done: 'false',
+      count: 0
     }
   }
 
   render() {
 
   return (
-
+    <div className="container">
     <form onSubmit={this.handleSubmit.bind(this)}>
       <input 
          type="text" 
@@ -28,6 +30,9 @@ class NewTaskForm extends Component {
          required />
       <button>Add</button>
     </form>
+
+      <TaskList key={this.state.count} />
+    </div>
 
 
   )
@@ -59,6 +64,7 @@ class NewTaskForm extends Component {
         console.log('Form sent')
       }
     })
+    this.setState({ count: this.state.count + 1 })
   }
 }
 

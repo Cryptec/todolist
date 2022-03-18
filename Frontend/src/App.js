@@ -13,7 +13,7 @@ function App() {
        <h1 className="title">Todo List</h1>
       <br></br>
       <NewTaskForm />
-      <TaskList />
+      
     </div>
   )
 }
