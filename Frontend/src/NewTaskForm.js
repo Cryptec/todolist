@@ -17,6 +17,7 @@ class NewTaskForm extends Component {
   render() {
 
   return (
+
     <form onSubmit={this.handleSubmit.bind(this)}>
       <input 
          type="text" 
@@ -27,6 +28,8 @@ class NewTaskForm extends Component {
          required />
       <button>Add</button>
     </form>
+
+
   )
   }
   

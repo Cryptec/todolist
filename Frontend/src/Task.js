@@ -11,6 +11,8 @@ class Task extends Component {
     this.state = {
       task: '',
       done: '',
+      id: '',
+      count: 0,
       fetchtasks: []
     }
   }
@@ -21,37 +23,52 @@ class Task extends Component {
       const fetchtasks = await response.json()
       this.setState({ fetchtasks })
       this.state.fetchtasks.map(task => {
-      this.setState({ done: task.done, task: task.task })
-      this.handleCheck()
+      this.setState({ done: task.done, task: task.task, id: task.id })
+      return this.handleCheck()
       })
     } else {
       console.log('error')
     }
   }
 
-  handleCheck = () => {
+  fetchTasks = async () => {
+    const response = await fetch(`${API_ENDPOINT}/api/tasks`)
+    if (response.ok) {
+      const fetchtasks = await response.json()
+      this.setState({ fetchtasks })
+      this.state.fetchtasks.map(task => {
+        this.setState({ done: task.done, task: task.task, id: task.id })
+        return this.handleCheck()
+        })
+    } else {
+      console.log('error')
+    }
+  }
+
+  handleCheck = (id) => {
     if (this.state.done === 'true') {
-      document.getElementById('checkbox').checked = true
+      document.getElementById(this.state.id).checked = true  
     } else if  (this.state.done === 'false') {
-      document.getElementById('checkbox').checked = false
+      document.getElementById(this.state.id).checked = false
     }
   }
 
   render() {
     return this.state.fetchtasks.map(tasks => {
   
+      const taskdone = tasks.done === 'true'
     return (
     <tr>
       <td>
         <input 
            type="checkbox" 
-           id='checkbox' 
+           id={tasks.id}
            onChange={() => this.handleChange(tasks.id)}
            value={this.state.done}
            />
       </td>
       <td>
-        <span className={ this.state.done === "true" ? 'task-done' : '' }>{ tasks.task}</span>
+        <span id={tasks.id} key={this.state.count} className={ taskdone ? 'task-done' : '' }>{tasks.task}</span>
       </td>
       <td>
         <span onClick={() => this.deleteTableRow(tasks.id)}> X </span>
@@ -75,11 +92,8 @@ class Task extends Component {
   
   
   handleChange(id) {
-
-    var checkBox = document.getElementById('checkbox')
-
+    var checkBox = document.getElementById(id)
     if (checkBox.checked === true) {
-      this.setState({ done: 'true' })
       axios({
         method: 'POST',
         url: `${API_ENDPOINT}/api/setstate/${id}`,
@@ -94,10 +108,11 @@ class Task extends Component {
             task: ''
           })
           console.log('Form sent')
+          this.fetchTasks()
         }
       })
     } else if (checkBox.checked === false) { 
-      this.setState({ done: 'false' }) 
+      
       axios({
         method: 'POST',
         url: `${API_ENDPOINT}/api/setstate/${id}`,
@@ -112,13 +127,14 @@ class Task extends Component {
             task: ''
           })
           console.log('Form sent')
+          this.fetchTasks()
         }
       })
-    }  
+    } 
   }
   handleSubmit(event) {
     event.preventDefault()
-
+    this.setState({ count: this.state.count + 1})
     axios({
       method: 'POST',
       url: `${API_ENDPOINT}/api/settask`,
