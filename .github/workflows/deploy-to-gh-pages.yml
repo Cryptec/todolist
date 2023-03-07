@@ -1,0 +1,26 @@
+name: Build and Deploy
+on: [push] # defaults to master
+permissions:
+  contents: write
+env:
+    REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
+    REACT_APP_SITE_TITLE: ${{ secrets.REACT_APP_SITE_TITLE }}
+defaults:
+  run:
+    working-directory: ./Frontend
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install and Build 🔧
+        run: |
+          yarn install
+          yarn build
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: ./Frontend/build
