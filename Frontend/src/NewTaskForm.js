@@ -61,10 +61,10 @@ class NewTaskForm extends Component {
         this.setState({
           task: ''
         })
+        this.setState({ count: this.state.count + 1 })
         console.log('Form sent')
       }
     })
-    this.setState({ count: this.state.count + 1 })
   }
 }
 

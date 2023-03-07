@@ -2,15 +2,19 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+[type="checkbox"] {
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  -o-appearance:none;
+  width: 17px;
+  height: 17px;
+  border-radius: 5px;
+  border: 2px solid #000000;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+[type="checkbox"]:checked {
+  background-color: #000000;
+  box-shadow: inset 0px 0px 0px 3px #A6979C;
 }
 
 .App-header {
@@ -22,17 +26,4 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

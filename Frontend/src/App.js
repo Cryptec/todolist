@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="container">
       <br></br>
-       <h1 className="title">Todo List</h1>
+       <h1 className="title">Todo-list</h1>
       <br></br>
       <NewTaskForm />
       

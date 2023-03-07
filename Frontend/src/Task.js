@@ -71,8 +71,8 @@ class Task extends Component {
       <td>
         <span id={tasks.id} key={this.state.count} className={ taskdone ? 'task-done' : '' }>{tasks.task}</span>
       </td>
-      <td>
-        <span style={{cursor: 'pointer'}} onClick={() => this.deleteTableRow(tasks.id)}> X </span>
+      <td style={{cursor: 'pointer', width: "40px"}}>
+        <span style={{cursor: 'pointer', fontWeight: 'bold'}} onClick={() => this.deleteTableRow(tasks.id)}> &#10005; </span>
       </td>
     </tr>
   )
