@@ -3,7 +3,6 @@ import React from 'react'
 import './App.css'
 import './Todo.scss'
 import NewTaskForm from './NewTaskForm'
-import TaskList from './TaskList'
 
 function App() {
   // 2
